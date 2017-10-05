@@ -1,0 +1,124 @@
+package com.shay.test.countries.shaycountriestest.setup;
+
+import android.content.Context;
+
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.shay.test.countries.shaycountriestest.model.Country;
+import com.shay.test.countries.shaycountriestest.model.Region;
+import com.shay.test.countries.shaycountriestest.network.IResponseListener;
+import com.shay.test.countries.shaycountriestest.network.VolleyApiClient;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+/**
+ * Created by Sahar on 04/10/2017.
+ */
+
+public class SetupInteractorImpl implements ISetupInteractor, IResponseListener
+{
+    private OnSetupFinishedListener mListener;
+    private List<Country> mCountryData;
+    private List<Region> mRegionData;
+
+    @Override
+    public void loadData(final OnSetupFinishedListener listener, Context ctx)
+    {
+        mListener = listener;
+        VolleyApiClient.GetInstance(ctx).VolleyRequest(StringRequest.Method.GET, VolleyApiClient.COUNTRIES_DATA_URL, null, this);
+    }
+
+    @Override
+    public List<Country> getCountryData()
+    {
+        return mCountryData;
+    }
+
+    @Override
+    public List<Region> getRegionData()
+    {
+        return mRegionData;
+    }
+
+    @Override
+    public void onSuccess(Object response)
+    {
+        JSONArray data = (JSONArray) response;
+        HashMap<String, Country> countryData = new HashMap<>();
+        HashMap<String, Region> regionData = new HashMap<>();
+        for (int i = 0, size = data.length(); i < size; i++)
+        {
+            Country country;
+            Region region;
+            try
+            {
+                JSONObject countryJson = data.getJSONObject(i);
+                String key = countryJson.getString("alpha3Code");
+                if (countryData.containsKey(key))
+                {
+                    country = countryData.get(key);
+                    country.parseCountryData(countryJson);
+                } else
+                {
+                    country = new Country(key);
+                    country.parseCountryData(countryJson);
+                    countryData.put(key, country);
+                }
+
+                JSONArray boarders = countryJson.getJSONArray("borders");
+                for (int x = 0, boarderSize = boarders.length(); x < boarderSize; x++)
+                {
+                    String name = (String) boarders.get(x);
+                    if (countryData.containsKey(name))
+                    {
+                        Country boarder = countryData.get(name);
+                        country.addBoarder(boarder);
+                    }
+                    else
+                    {
+                        Country boarder = new Country(name);
+                        countryData.put(name, boarder);
+                        country.addBoarder(boarder);
+                    }
+                }
+
+                if (regionData.containsKey(country.getRegionName()))
+                {
+                    region = regionData.get(country.getRegionName());
+                    region.addCountry(country);
+                } else
+                {
+                    region = new Region(country.getRegionName());
+                    region.addCountry(country);
+                    regionData.put(country.getRegionName(), region);
+                }
+            } catch (JSONException e)
+            {
+
+            }
+        }
+
+        mCountryData = new ArrayList<>(countryData.values());
+        mRegionData = new ArrayList<>(regionData.values());
+
+        if (mListener != null)
+        {
+            mListener.onSuccess();
+        }
+    }
+
+    @Override
+    public void onError(VolleyError error)
+    {
+        if (mListener != null)
+        {
+            mListener.onError();
+        }
+    }
+}
