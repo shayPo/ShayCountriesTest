@@ -7,7 +7,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -21,7 +20,7 @@ public class Country implements Comparable<Country>
     private String mCapital;
     private String mRegion;
     private String mCurrency;
-    private int mSize;
+    private double mSize;
 
     public Country(String sortName)
     {
@@ -35,7 +34,7 @@ public class Country implements Comparable<Country>
             mFullName = countryJson.getString("name");
             mCapital = countryJson.getString("capital");
             mRegion = countryJson.getString("region");
-            mSize = countryJson.getInt("area");//currencies
+            mSize = countryJson.getDouble("area");
             JSONArray currencies = countryJson.getJSONArray("currencies");
             if(currencies.length() > 0)
             {
@@ -62,21 +61,20 @@ public class Country implements Comparable<Country>
         return mFullName;
     }
 
-    public int getSize()
+    public double getSize()
     {
         return mSize;
     }
 
     public List<Country> getBoarders()
     {
-        Collections.sort(mBoarders);
         return mBoarders;
     }
 
     @Override
     public int compareTo(@NonNull Country country)
     {
-        return 0;
+        return (int) (country.getSize() - mSize);
     }
 
     public String getCapital()

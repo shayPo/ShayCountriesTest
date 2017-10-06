@@ -10,4 +10,5 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="boarders">Boarders :</string>
+    <string name="region">Region :</string>
 </resources>

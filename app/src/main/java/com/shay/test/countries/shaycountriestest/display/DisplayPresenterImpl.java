@@ -68,7 +68,7 @@ public class DisplayPresenterImpl implements IDisplayPresenter
 
     private void displayCountries()
     {
-        mView.showTitle(mCtx.getString(R.string.name) + mRegion.getName());
+        mView.showTitle(mCtx.getString(R.string.region) + mRegion.getName());
         mView.showSubtitle("");
         mView.updateList(new CountriesAdapter(mRegion.getCountries(), mView));
     }

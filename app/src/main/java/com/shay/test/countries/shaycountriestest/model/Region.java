@@ -1,6 +1,7 @@
 package com.shay.test.countries.shaycountriestest.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -24,6 +25,7 @@ public class Region
 
     public List<Country> getCountries()
     {
+        Collections.sort(mData);
         return mData;
     }
 
