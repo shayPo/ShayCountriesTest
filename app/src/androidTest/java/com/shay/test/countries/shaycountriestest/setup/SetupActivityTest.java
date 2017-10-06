@@ -4,15 +4,8 @@ import android.content.Intent;
 import android.support.test.rule.ActivityTestRule;
 import android.util.Log;
 
-import com.shay.test.countries.shaycountriestest.R;
-
 import org.junit.Rule;
 import org.junit.Test;
-
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 /**
  * Created by Sahar on 06/10/2017.
@@ -26,8 +19,6 @@ public class SetupActivityTest
     public void testView()
     {
         mRule.launchActivity(new Intent());
-
-        onView(withText(R.string.loading)).check(matches(isDisplayed()));
     }
 
     @Test
