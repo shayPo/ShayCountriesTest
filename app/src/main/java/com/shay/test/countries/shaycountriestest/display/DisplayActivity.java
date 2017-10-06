@@ -2,9 +2,11 @@ package com.shay.test.countries.shaycountriestest.display;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
 import com.shay.test.countries.shaycountriestest.R;
@@ -36,7 +38,13 @@ public class DisplayActivity extends AppCompatActivity implements IDisplayView
         mListView.setLayoutManager(new LinearLayoutManager(this));
 
         mPresenter = new DisplayPresenterImpl(this, this);
-        mPresenter.displayRegions();
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        mPresenter.onDestroy();
+        super.onDestroy();
     }
 
     @Override
@@ -45,14 +53,43 @@ public class DisplayActivity extends AppCompatActivity implements IDisplayView
         mTitle.setText(title);
     }
 
+    @Override
+    public void showSubtitle(String text)
+    {
+        mSubTitle.setText(text);
+    }
+
     public void updateList(RecyclerView.Adapter adapter)
     {
         mListView.setAdapter(adapter);
     }
 
     @Override
+    public void showExitMessage()
+    {
+        AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+        dlgAlert.setMessage(R.string.exit);
+        dlgAlert.setPositiveButton(R.string.ok, mPresenter);
+        dlgAlert.setNegativeButton(R.string.cancel, null);
+        dlgAlert.setCancelable(true);
+        dlgAlert.create().show();
+    }
+
+    @Override
+    public void close()
+    {
+        finish();
+    }
+
+    @Override
     public void onBackPressed()
     {
-        super.onBackPressed();
+        mPresenter.previousLevel();
+    }
+
+    @Override
+    public void onClick(View view)
+    {
+        mPresenter.nextLevel(view.getTag());
     }
 }

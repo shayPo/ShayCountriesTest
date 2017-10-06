@@ -52,7 +52,7 @@ public class SetupPresenterImpl implements ISetupPresenter, ISetupInteractor.OnS
         App app = App.getInstance();
         IGlobalPresenter globalPresenter = app.getPresenter();
         globalPresenter.setCountryData(mInteractor.getCountryData());
-        globalPresenter.setRegionData(mInteractor.getRegionData());
+        globalPresenter.setRegionsData(mInteractor.getRegionData());
         mView.navigateToDisplay();
     }
 

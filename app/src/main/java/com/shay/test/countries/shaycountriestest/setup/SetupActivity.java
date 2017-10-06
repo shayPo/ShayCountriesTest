@@ -56,6 +56,7 @@ public class SetupActivity extends AppCompatActivity implements ISetupView, View
     public void navigateToDisplay()
     {
         Intent showDisplay = new Intent(this, DisplayActivity.class);
+        showDisplay.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(showDisplay);
     }
 

@@ -14,9 +14,9 @@ public interface IGlobalPresenter
 
     void setCountryData(List<Country> countryData);
 
-    void setRegionData(List<Region> regionData);
+    void setRegionsData(List<Region> regionData);
 
     List<Country> getCountryData();
 
-    List<Region> getRegionData();
+    List<Region> getRegionsData();
 }

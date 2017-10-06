@@ -1,32 +1,31 @@
 package com.shay.test.countries.shaycountriestest.model;
 
+import android.support.annotation.NonNull;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by Sahar on 05/10/2017.
  */
 
-public class Country
+public class Country implements Comparable<Country>
 {
     private List<Country> mBoarders = new ArrayList<>();
     private String mFullName;
     private String mCapital;
     private String mRegion;
-    private long mSize;
+    private String mCurrency;
+    private int mSize;
 
     public Country(String sortName)
     {
 
-    }
-//{"name":"Afghanistan","topLevelDomain":[".af"],"alpha2Code":"AF","alpha3Code":"AFG","callingCodes":["93"],"capital":"Kabul","altSpellings":["AF","Afġānistān"],"region":"Asia","subregion":"Southern Asia","population":27657145,"latlng":[33,65],"demonym":"Afghan","area":652230,"gini":27.8,"timezones":["UTC+04:30"],"borders":["IRN","PAK","TKM","UZB","TJK","CHN"],"nativeName":"افغانستان","numericCode":"004","currencies":[{"code":"AFN","name":"Afghan afghani","symbol":"؋"}],"languages":[{"iso639_1":"ps","iso639_2":"pus","name":"Pashto","nativeName":"پښتو"},{"iso639_1":"uz","iso639_2":"uzb","name":"Uzbek","nativeName":"Oʻzbek"},{"iso639_1":"tk","iso639_2":"tuk","name":"Turkmen","nativeName":"Türkmen"}],"translations":{"de":"Afghanistan","es":"Afganistán","fr":"Afghanistan","ja":"アフガニスタン","it":"Afghanistan","br":"Afeganistão","pt":"Afeganistão","nl":"Afghanistan","hr":"Afganistan","fa":"افغانستان"},"flag":"https:\/\/restcountries.eu\/data\/afg.svg","regionalBlocs":[{"acronym":"SAARC","name":"South Asian Association for Regional Cooperation","otherAcronyms":[],"otherNames":[]}],"cioc":"AFG"}
-
-    public String getRegionName()
-    {
-        return mRegion;
     }
 
     public void parseCountryData(JSONObject countryJson)
@@ -36,7 +35,12 @@ public class Country
             mFullName = countryJson.getString("name");
             mCapital = countryJson.getString("capital");
             mRegion = countryJson.getString("region");
-            mSize = countryJson.getLong("area");
+            mSize = countryJson.getInt("area");//currencies
+            JSONArray currencies = countryJson.getJSONArray("currencies");
+            if(currencies.length() > 0)
+            {
+                mCurrency = ((JSONObject) currencies.get(0)).getString("name");
+            }
         } catch (JSONException e)
         {
             e.printStackTrace();
@@ -46,5 +50,42 @@ public class Country
     public void addBoarder(Country boarder)
     {
         mBoarders.add(boarder);
+    }
+
+    public String getRegionName()
+    {
+        return mRegion;
+    }
+
+    public String getName()
+    {
+        return mFullName;
+    }
+
+    public int getSize()
+    {
+        return mSize;
+    }
+
+    public List<Country> getBoarders()
+    {
+        Collections.sort(mBoarders);
+        return mBoarders;
+    }
+
+    @Override
+    public int compareTo(@NonNull Country country)
+    {
+        return 0;
+    }
+
+    public String getCapital()
+    {
+        return mCapital;
+    }
+
+    public String getCurrency()
+    {
+        return mCurrency;
     }
 }

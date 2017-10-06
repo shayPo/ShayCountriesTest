@@ -22,6 +22,11 @@ public class Region
         mData.add(country);
     }
 
+    public List<Country> getCountries()
+    {
+        return mData;
+    }
+
     public String getName()
     {
         return mName;

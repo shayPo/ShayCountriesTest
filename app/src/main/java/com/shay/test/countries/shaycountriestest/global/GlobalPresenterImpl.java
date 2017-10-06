@@ -21,7 +21,7 @@ public class GlobalPresenterImpl implements IGlobalPresenter
     }
 
     @Override
-    public void setRegionData(List<Region> regionData)
+    public void setRegionsData(List<Region> regionData)
     {
         mRegionData = regionData;
     }
@@ -33,7 +33,7 @@ public class GlobalPresenterImpl implements IGlobalPresenter
     }
 
     @Override
-    public List<Region> getRegionData()
+    public List<Region> getRegionsData()
     {
         return mRegionData;
     }

@@ -71,6 +71,17 @@ public class SetupInteractorImpl implements ISetupInteractor, IResponseListener
                     countryData.put(key, country);
                 }
 
+                if (regionData.containsKey(country.getRegionName()))
+                {
+                    region = regionData.get(country.getRegionName());
+                    region.addCountry(country);
+                } else
+                {
+                    region = new Region(country.getRegionName());
+                    region.addCountry(country);
+                    regionData.put(country.getRegionName(), region);
+                }
+
                 JSONArray boarders = countryJson.getJSONArray("borders");
                 for (int x = 0, boarderSize = boarders.length(); x < boarderSize; x++)
                 {
@@ -86,17 +97,6 @@ public class SetupInteractorImpl implements ISetupInteractor, IResponseListener
                         countryData.put(name, boarder);
                         country.addBoarder(boarder);
                     }
-                }
-
-                if (regionData.containsKey(country.getRegionName()))
-                {
-                    region = regionData.get(country.getRegionName());
-                    region.addCountry(country);
-                } else
-                {
-                    region = new Region(country.getRegionName());
-                    region.addCountry(country);
-                    regionData.put(country.getRegionName(), region);
                 }
             } catch (JSONException e)
             {

@@ -3,4 +3,11 @@
     <string name="retry_text">Error</string>
     <string name="loading">Loading Data...</string>
     <string name="regions_title">Regions</string>
+    <string name="capital">Capital :</string>
+    <string name="currency">Currency :</string>
+    <string name="name">Name :</string>
+    <string name="exit">Do you want to exit ?</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="boarders">Boarders :</string>
 </resources>

@@ -1,16 +1,23 @@
 package com.shay.test.countries.shaycountriestest.display;
 
+import android.content.DialogInterface;
+
 /**
  * Created by Sahar on 05/10/2017.
  */
-enum Stat
-{
-    REGIONS,
-    COUNTRIES,
-    COUNTRY
-}
 
-public interface IDisplayPresenter
+public interface IDisplayPresenter extends DialogInterface.OnClickListener
 {
-    void displayRegions();
+    enum Stat
+    {
+        REGIONS,
+        COUNTRIES,
+        COUNTRY
+    }
+
+    void onDestroy();
+
+    void nextLevel(Object data);
+
+    void previousLevel();
 }

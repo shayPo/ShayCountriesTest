@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.shay.test.countries.shaycountriestest.R;
-import com.shay.test.countries.shaycountriestest.model.Region;
+import com.shay.test.countries.shaycountriestest.model.Country;
 
 import java.util.List;
 
@@ -15,27 +15,27 @@ import java.util.List;
  * Created by Sahar on 05/10/2017.
  */
 
-public class RegionsAdapter extends RecyclerView.Adapter<RegionsAdapter.RegionsViewHolder>
+public class CountriesAdapter extends RecyclerView.Adapter<CountriesAdapter.CountriesViewHolder>
 {
-    private List<Region> mData;
+    private List<Country> mData;
     private View.OnClickListener mListener;
 
-    public RegionsAdapter(List<Region> data, View.OnClickListener listener)
+    public CountriesAdapter(List<Country> data, View.OnClickListener listener)
     {
         mData = data;
         mListener = listener;
     }
 
     @Override
-    public RegionsViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    public CountriesAdapter.CountriesViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.region_row, null);
-        RegionsViewHolder viewHolder = new RegionsViewHolder(view);
+        CountriesAdapter.CountriesViewHolder viewHolder = new CountriesAdapter.CountriesViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(RegionsViewHolder holder, int position)
+    public void onBindViewHolder(CountriesAdapter.CountriesViewHolder holder, int position)
     {
         holder.updateData(mData.get(position));
     }
@@ -46,22 +46,21 @@ public class RegionsAdapter extends RecyclerView.Adapter<RegionsAdapter.RegionsV
         return mData == null ? 0 : mData.size();
     }
 
-    class RegionsViewHolder extends RecyclerView.ViewHolder
+    class CountriesViewHolder extends RecyclerView.ViewHolder
     {
         private TextView mTitle;
 
-        public RegionsViewHolder(View itemView)
+        public CountriesViewHolder(View itemView)
         {
             super(itemView);
             mTitle = (TextView) itemView.findViewById(R.id.title);
             mTitle.setOnClickListener(mListener);
         }
 
-        public void updateData(Region region)
+        public void updateData(Country country)
         {
-            mTitle.setTag(region);
-            mTitle.setText(region.getName());
+            mTitle.setTag(country);
+            mTitle.setText(country.getName());
         }
     }
-
 }
