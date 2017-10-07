@@ -9,7 +9,6 @@ import com.shay.test.countries.shaycountriestest.model.Region;
 import com.shay.test.countries.shaycountriestest.network.VolleyApiClient;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ public class SetupInteractorImpl implements ISetupInteractor
     @Override
     public List<Country> getCountryData()
     {
-        if(mCountryData == null)
+        if (mCountryData == null)
         {
             mCountryData = new ArrayList<>();
         }
@@ -46,7 +45,7 @@ public class SetupInteractorImpl implements ISetupInteractor
     @Override
     public List<Region> getRegionData()
     {
-        if(mRegionData == null)
+        if (mRegionData == null)
         {
             mRegionData = new ArrayList<>();
         }
@@ -65,51 +64,47 @@ public class SetupInteractorImpl implements ISetupInteractor
             {
                 Country country;
                 Region region;
-                try
+
+                JSONObject countryJson = data.getJSONObject(i);
+                String key = countryJson.getString("alpha3Code");
+                if (countryData.containsKey(key))
                 {
-                    JSONObject countryJson = data.getJSONObject(i);
-                    String key = countryJson.getString("alpha3Code");
-                    if (countryData.containsKey(key))
-                    {
-                        country = countryData.get(key);
-                        country.parseCountryData(countryJson);
-                    } else
-                    {
-                        country = new Country(key);
-                        country.parseCountryData(countryJson);
-                        countryData.put(key, country);
-                    }
-
-                    if (regionData.containsKey(country.getRegionName()))
-                    {
-                        region = regionData.get(country.getRegionName());
-                        region.addCountry(country);
-                    } else
-                    {
-                        region = new Region(country.getRegionName());
-                        region.addCountry(country);
-                        regionData.put(country.getRegionName(), region);
-                    }
-
-                    JSONArray boarders = countryJson.getJSONArray("borders");
-                    for (int x = 0, boarderSize = boarders.length(); x < boarderSize; x++)
-                    {
-                        String name = (String) boarders.get(x);
-                        if (countryData.containsKey(name))
-                        {
-                            Country boarder = countryData.get(name);
-                            country.addBoarder(boarder);
-                        } else
-                        {
-                            Country boarder = new Country(name);
-                            countryData.put(name, boarder);
-                            country.addBoarder(boarder);
-                        }
-                    }
-                } catch (JSONException e)
+                    country = countryData.get(key);
+                    country.parseCountryData(countryJson);
+                } else
                 {
-
+                    country = new Country();
+                    country.parseCountryData(countryJson);
+                    countryData.put(key, country);
                 }
+
+                if (regionData.containsKey(country.getRegionName()))
+                {
+                    region = regionData.get(country.getRegionName());
+                    region.addCountry(country);
+                } else
+                {
+                    region = new Region(country.getRegionName());
+                    region.addCountry(country);
+                    regionData.put(country.getRegionName(), region);
+                }
+
+                JSONArray boarders = countryJson.getJSONArray("borders");
+                for (int x = 0, boarderSize = boarders.length(); x < boarderSize; x++)
+                {
+                    String name = (String) boarders.get(x);
+                    if (countryData.containsKey(name))
+                    {
+                        Country boarder = countryData.get(name);
+                        country.addBoarder(boarder);
+                    } else
+                    {
+                        Country boarder = new Country();
+                        countryData.put(name, boarder);
+                        country.addBoarder(boarder);
+                    }
+                }
+
             }
 
             mCountryData = new ArrayList<>(countryData.values());
@@ -119,8 +114,7 @@ public class SetupInteractorImpl implements ISetupInteractor
             {
                 mListener.onSuccess();
             }
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             if (mListener != null)
             {

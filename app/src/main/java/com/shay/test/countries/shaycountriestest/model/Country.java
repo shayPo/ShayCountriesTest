@@ -22,7 +22,7 @@ public class Country implements Comparable<Country>
     private String mCurrency;
     private double mSize;
 
-    public Country(String sortName)
+    public Country()
     {
 
     }

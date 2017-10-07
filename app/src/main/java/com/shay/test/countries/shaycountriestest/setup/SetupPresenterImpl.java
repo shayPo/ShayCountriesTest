@@ -30,6 +30,7 @@ public class SetupPresenterImpl implements ISetupPresenter, ISetupInteractor.OnS
     {
         mView = null;
         mCtx = null;
+        mInteractor = null;
     }
 
     @Override
