@@ -7,7 +7,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Created by Sahar on 06/10/2017.
+ * Created by Shay on 06/10/2017.
  */
 public class SetupActivityTest
 {

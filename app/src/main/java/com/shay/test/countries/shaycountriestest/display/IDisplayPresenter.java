@@ -3,7 +3,7 @@ package com.shay.test.countries.shaycountriestest.display;
 import android.content.DialogInterface;
 
 /**
- * Created by Sahar on 05/10/2017.
+ * Created by Shay on 05/10/2017.
  */
 
 public interface IDisplayPresenter extends DialogInterface.OnClickListener

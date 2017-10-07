@@ -10,7 +10,7 @@ import com.shay.test.countries.shaycountriestest.model.Country;
 import com.shay.test.countries.shaycountriestest.model.Region;
 
 /**
- * Created by Sahar on 05/10/2017.
+ * Created by Shay on 05/10/2017.
  */
 
 public class DisplayPresenterImpl implements IDisplayPresenter

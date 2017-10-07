@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.shay.test.countries.shaycountriestest.R;
 
 /**
- * Created by Sahar on 05/10/2017.
+ * Created by Shay on 05/10/2017.
  */
 
 public class DisplayActivity extends AppCompatActivity implements IDisplayView

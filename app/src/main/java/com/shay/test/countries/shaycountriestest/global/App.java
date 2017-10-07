@@ -3,7 +3,7 @@ package com.shay.test.countries.shaycountriestest.global;
 import android.app.Application;
 
 /**
- * Created by Sahar on 05/10/2017.
+ * Created by Shay on 05/10/2017.
  */
 
 public class App extends Application

@@ -63,8 +63,8 @@ public class SetupActivity extends AppCompatActivity implements ISetupView, View
     @Override
     public void onClick(View view)
     {
-        mPresenter.loadData();
         view.setOnClickListener(null);
+        mPresenter.loadData();
     }
 
     @Override

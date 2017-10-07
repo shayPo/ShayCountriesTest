@@ -9,7 +9,7 @@ import com.shay.test.countries.shaycountriestest.network.IResponseListener;
 import java.util.List;
 
 /**
- * Created by Sahar on 04/10/2017.
+ * Created by Shay on 04/10/2017.
  */
 
 public interface ISetupInteractor extends IResponseListener

@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by Sahar on 04/10/2017.
+ * Created by Shay on 04/10/2017.
  */
 
 public class SetupInteractorImpl implements ISetupInteractor
