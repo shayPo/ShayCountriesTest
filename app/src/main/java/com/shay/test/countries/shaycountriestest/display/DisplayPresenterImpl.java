@@ -101,9 +101,7 @@ public class DisplayPresenterImpl implements IDisplayPresenter
     @Override
     public void previousLevel()
     {
-        boolean result = mCurrentStat > 0;
-
-        if (result)
+        if (mCurrentStat > 0)
         {
             mCurrentStat--;
             updateView(null);

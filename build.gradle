@@ -16,8 +16,37 @@ allprojects {
     repositories {
         jcenter()
     }
+
+    ext {
+        retrofitVersion = "2.0.0"
+    }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+
+allprojects {
+    repositories {
+        jcenter()
+        maven { url 'https://maven.google.com' }
+        maven {
+            url "https://jitpack.io"
+        }
+    }
+
+    ext {
+        sdkVersion = 24
+        buildToolsVrs = "25.0.0"
+
+        kotlinVersion = "1.1.3-2"
+
+        archComponentsVersion = "1.0.0-alpha3"
+        butterKnifeVersion = '8.5.1'
+        mockitoKotlinVersion = "1.4.0"
+        okhttpVersion = "3.0.1"
+        retrofitVersion = "2.0.0"
+        supportLibVersion = "25.3.1"
+    }
 }

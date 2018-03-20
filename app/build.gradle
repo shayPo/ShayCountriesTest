@@ -39,4 +39,6 @@ dependencies {
     testCompile 'org.mockito:mockito-core:1.10.19'
     //ui test
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+    compile "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    compile "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
 }
