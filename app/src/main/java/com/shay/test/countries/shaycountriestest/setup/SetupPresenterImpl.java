@@ -6,6 +6,7 @@ import com.shay.test.countries.shaycountriestest.global.App;
 import com.shay.test.countries.shaycountriestest.global.IGlobalPresenter;
 import com.shay.test.countries.shaycountriestest.model.Country;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 /**
@@ -37,7 +38,7 @@ public class SetupPresenterImpl implements ISetupPresenter, ISetupInteractor.OnS
     public void loadData()
     {
         mView.showProgress();
-        mInteractor.loadData(this, mCtx);
+        mInteractor.loadData(new WeakReference<ISetupInteractor.OnSetupFinishedListener>(this), mCtx);
     }
 
     ////////////////// fix

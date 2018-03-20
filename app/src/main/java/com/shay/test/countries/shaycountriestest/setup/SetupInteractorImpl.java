@@ -11,6 +11,7 @@ import com.shay.test.countries.shaycountriestest.network.VolleyApiClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,12 +22,12 @@ import java.util.List;
 
 public class SetupInteractorImpl implements ISetupInteractor
 {
-    private OnSetupFinishedListener mListener;
+    private WeakReference<OnSetupFinishedListener> mListener;
     private List<Country> mCountryData;
     private List<Region> mRegionData;
 
     @Override
-    public void loadData(final OnSetupFinishedListener listener, Context ctx)
+    public void loadData(final WeakReference<OnSetupFinishedListener> listener, Context ctx)
     {
         mListener = listener;
         VolleyApiClient.GetInstance(ctx).VolleyRequest(StringRequest.Method.GET, VolleyApiClient.COUNTRIES_DATA_URL, null, this);
@@ -112,13 +113,13 @@ public class SetupInteractorImpl implements ISetupInteractor
 
             if (mListener != null)
             {
-                mListener.onSuccess();
+                mListener.get().onSuccess();
             }
         } catch (Exception e)
         {
             if (mListener != null)
             {
-                mListener.onError();
+                mListener.get().onError();
             }
         }
     }
@@ -128,7 +129,7 @@ public class SetupInteractorImpl implements ISetupInteractor
     {
         if (mListener != null)
         {
-            mListener.onError();
+            mListener.get().onError();
         }
     }
 }

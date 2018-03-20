@@ -71,6 +71,7 @@ public class SetupActivity extends AppCompatActivity implements ISetupView, View
     protected void onDestroy()
     {
         mPresenter.onDestroy();
+        mPresenter = null;
         super.onDestroy();
     }
 }

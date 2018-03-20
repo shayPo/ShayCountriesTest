@@ -44,6 +44,7 @@ public class DisplayActivity extends AppCompatActivity implements IDisplayView
     protected void onDestroy()
     {
         mPresenter.onDestroy();
+        mPresenter = null;
         super.onDestroy();
     }
 

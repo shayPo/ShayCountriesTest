@@ -6,6 +6,7 @@ import com.shay.test.countries.shaycountriestest.model.Country;
 import com.shay.test.countries.shaycountriestest.model.Region;
 import com.shay.test.countries.shaycountriestest.network.IResponseListener;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ import java.util.List;
 
 public interface ISetupInteractor extends IResponseListener
 {
-    void loadData(OnSetupFinishedListener listener, Context ctx);
+    void loadData(WeakReference<OnSetupFinishedListener> listener, Context ctx);
 
     List<Country> getCountryData();
 
